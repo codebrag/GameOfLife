@@ -14,13 +14,13 @@ class BoardReader(source: Source,
 
     val linesWithIndex = source.getLines.withFilter(!commentPredicate(_)).zipWithIndex
 
-    linesWithIndex.flatMap[Cell] {
-      case (s, i) => {
-        s.zipWithIndex.withFilter{
-          case (c, j) => c == liveMark
+    linesWithIndex.flatMap {
+      case (line, i) => {
+        line.zipWithIndex.withFilter{
+          case (cell, j) => cell == liveMark
         }.map{
-          case (c, j) => Cell(j, i)
-        }.iterator
+          case (cell, j) => Cell(j, i)
+        }
       }
     }.toSet
   }
