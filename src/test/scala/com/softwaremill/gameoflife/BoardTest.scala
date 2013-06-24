@@ -16,7 +16,7 @@ class BoardTest extends FunSuite with ShouldMatchers {
     nextBoard.isCellAlive(Cell(0, 0)) should be(false)
   }
 
-  test("should spawn cells with three neighbours") {
+  test("should oscillate a blinker") {
     val b = Board(Cell(-1, 0), Cell(0, 0), Cell(1, 0))
     val nextBoard = b.next
 
