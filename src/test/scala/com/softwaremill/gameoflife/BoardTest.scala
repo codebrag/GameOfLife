@@ -29,6 +29,16 @@ class BoardTest extends FunSuite with ShouldMatchers {
     nextBoard.isCellAlive(Cell(1, 0)) should be(false)
   }
 
+  test("bounding box should be formed from edge points") {
+    val b = Board(Cell(-1, -2), Cell(1, 2))
+
+    b.boundingBox should be ===(Rectangle(-1, -2, 1, 2))
+  }
+
+  test("bounding box should be sane (0,0,0,0) if no cells are present") {
+    val b = Board()
+    b.boundingBox should be ===(Rectangle(0, 0, 0, 0))
+  }
 }
 
 class CellTest extends FunSuite with ShouldMatchers {

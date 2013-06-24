@@ -16,6 +16,18 @@ class Board private[gameoflife](private[gameoflife] val cells: Set[Cell]) {
     (boardCell.isAlive && liveNeighbours == 2) || liveNeighbours == 3
   }))
 
+  def boundingBox = {
+    if (cells.isEmpty)
+      Rectangle(0, 0, 0, 0)
+    else {
+      import math.{min, max}
+      // xMin, yMin, xMax, yMax
+      cells.foldLeft(Rectangle(Int.MaxValue, Int.MaxValue, Int.MinValue, Int.MinValue))((acc, cell) => {
+        Rectangle(min(acc.x1, cell.x), min(acc.y1, cell.y), max(acc.x2, cell.x), max(acc.y2, cell.y))
+      })
+    }
+  }
+
 }
 
 case class Cell(x: Int, y: Int) {
