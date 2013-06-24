@@ -6,5 +6,6 @@ class GameOfLifeTests
   extends Suites(
     new BoardTest(),
     new CellTest(),
+    new BoardPrinterTest(),
     new BoardReaderTest()
   )
