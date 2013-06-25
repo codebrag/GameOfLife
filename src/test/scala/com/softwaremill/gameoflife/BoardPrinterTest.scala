@@ -1,14 +1,24 @@
 package com.softwaremill.gameoflife
 
 import org.scalatest.matchers.ShouldMatchers
-import org.scalatest.FunSuite
+import org.scalatest.FunSpec
 
-class BoardPrinterTest extends FunSuite with ShouldMatchers {
+class BoardPrinterTest extends FunSpec with ShouldMatchers {
 
-  test("a box with one cell in the centre") {
-    val b = Board(Cell(0, 0))
-    val bp = new BoardPrinter(b)
+  describe("A BoardPrinter") {
 
-    bp.print() should be ===("X\n")
+    it("should print a box with one live cell in the centre") {
+      val board = Board(Cell(0, 0))
+      val boardPrinter = new BoardPrinter(board)
+
+      boardPrinter.print().stripLineEnd should be === ("X")
+    }
+
+    it("should print one dead cell if no cells are alive") {
+      val board = Board()
+      val boardPrinter = new BoardPrinter(board)
+
+      boardPrinter.print().stripLineEnd should be === (".")
+    }
   }
 }
